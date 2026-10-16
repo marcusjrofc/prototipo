@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogar - Dilemas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="player-body">
+
+    <!-- TELA 1: REGISTRO -->
+    <div id="screen-register" class="screen active app-card glass-effect">
+        <div class="emoji-header">⚖️</div>
+        <h2 class="app-title">Identifique-se</h2>
+        <p class="app-subtitle">Pronto para fazer escolhas difíceis?</p>
+
+        <div class="input-group">
+            <label>Sua idade:</label>
+            <input type="number" id="userAge" placeholder="Ex: 18" class="custom-input">
+        </div>
+
+        <div class="input-group">
+            <label>Você é:</label>
+            <select id="userRole" class="custom-input bg-white">
+                <option value="aluno">Aluno(a)</option>
+                <option value="professor">Professor(a)</option>
+            </select>
+        </div>
+
+        <button onclick="startQuiz()" class="btn-primary w-full mt-6">Entrar na Partida</button>
+    </div>
+
+    <!-- TELA 2: QUIZ -->
+    <div id="screen-quiz" class="screen app-card glass-effect">
+        <div class="quiz-header">
+            <span class="badge" id="questionCounter">1 de 5</span>
+            <span class="timer">⏳ <span id="timerText">30s</span></span>
+        </div>
+
+        <!-- Imagem do Dilema -->
+        <div class="image-container">
+            <img id="questionImage" src="" alt="Cenário do Dilema">
+        </div>
+
+        <h3 id="questionText" class="question-text">Carregando dilema...</h3>
+
+        <div id="optionsContainer" class="options-container"></div>
+
+        <div id="feedbackArea" class="hidden feedback-box animate-fade">
+            <h2 id="feedbackMessage" class="feedback-title"></h2>
+            <p id="feedbackSubtext" class="feedback-subtext"></p>
+            <button onclick="nextQuestion()" class="btn-primary w-full mt-4">Próximo Dilema</button>
+        </div>
+    </div>
+
+    <!-- TELA 3: RESULTADOS -->
+    <div id="screen-results" class="screen app-card glass-effect text-center">
+        <h2 class="app-title text-3xl mb-2">Sua Análise!</h2>
+        <p class="app-subtitle mb-6">Veja como foram suas escolhas morais.</p>
+
+        <div class="score-container">
+            <h3>Acertos Éticos</h3>
+            <p id="finalScoreText" class="score-number">0/5</p>
+        </div>
+
+        <div class="chart-wrapper">
+            <canvas id="resultsChart"></canvas>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>

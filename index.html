@@ -3,99 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Interativo</title>
-    
-    <!-- Tailwind apenas para cores e tipografia -->
+    <title>Telão - Dilemas Éticos</title>
+    <!-- Tailwind para utilitários -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Seu CSS com Media Queries -->
+    <!-- Arquivo CSS Único -->
     <link rel="stylesheet" href="./style.css">
 </head>
-<body>
-
-    <!-- TELA 1: DESKTOP / PROJEÇÃO -->
-    <div id="screen-projection" class="screen active projection-container">
-        <h1 class="title-desktop">Quiz de Filosofia</h1>
-        <p class="subtitle-desktop">Acesse pelo seu celular escaneando o QR Code ou digitando o código!</p>
+<body class="index-body">
+    
+    <div class="projection-card glass-effect">
+        <h1 class="title-main">Dilemas Filosóficos</h1>
+        <p class="subtitle-main">Você decide o destino! Escaneie o QR Code para jogar.</p>
         
-        <div class="code-area">
-            <div class="qr-box">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://marcusjrofc.github.io/prototipo/" alt="QR Code">
+        <div class="code-container">
+            <!-- Box do QR Code -->
+            <div class="qr-wrapper">
+                <img id="dynamic-qr" src="" alt="QR Code" class="qr-image">
             </div>
             
-            <div class="pin-box">
-                <p>Código da Sala:</p>
-                <div class="pin-number">784 321</div>
+            <!-- Box do PIN -->
+            <div class="pin-wrapper">
+                <p class="pin-label">Código da Sala</p>
+                <div class="pin-display">784 321</div>
             </div>
         </div>
-        
-        <!-- Botão para avançar no protótipo -->
-        <button onclick="goToScreen('screen-register')" class="btn-primary mt-12">
-            Simular Acesso do Aluno 👉
-        </button>
     </div>
 
-    <!-- TELA 2: REGISTRO -->
-    <div id="screen-register" class="screen app-container glass-card">
-        <h2 class="text-2xl font-bold text-blue-900 mb-2">Identifique-se</h2>
-        <p class="text-gray-500 mb-6">Precisamos de alguns dados antes de começar.</p>
+    <script>
+        // Gera o link dinâmico para a página do aluno
+        const currentUrl = window.location.href.split('index.html')[0]; 
+        const playerUrl = currentUrl + "player.html";
         
-        <div class="form-group">
-            <label>Qual a sua idade?</label>
-            <input type="number" id="userAge" placeholder="Ex: 18" class="input-field">
-        </div>
-
-        <div class="form-group">
-            <label>Você é:</label>
-            <select id="userRole" class="input-field bg-white">
-                <option value="aluno">Aluno(a)</option>
-                <option value="professor">Professor(a)</option>
-            </select>
-        </div>
-
-        <button onclick="startQuiz()" class="btn-primary w-full mt-4">Começar Quiz</button>
-    </div>
-
-    <!-- TELA 3: QUIZ (PERGUNTA) -->
-    <div id="screen-quiz" class="screen app-container glass-card">
-        <div class="flex justify-between items-center mb-6">
-            <span class="badge" id="questionCounter">1 de 3</span>
-            <span class="timer">⏳ <span id="timerText">20s</span></span>
-        </div>
-        
-        <h3 id="questionText" class="question-text">Carregando...</h3>
-        
-        <div id="optionsContainer" class="options-grid">
-            <!-- Botões gerados no JS -->
-        </div>
-
-        <!-- Área de feedback imediato (escondida inicialmente) -->
-        <div id="feedbackArea" class="hidden mt-6 text-center animate-fade">
-            <h2 id="feedbackMessage" class="text-2xl font-bold mb-2"></h2>
-            <p id="feedbackSubtext" class="text-gray-600 mb-4"></p>
-            <button onclick="nextQuestion()" class="btn-primary w-full">Próxima Pergunta</button>
-        </div>
-    </div>
-
-    <!-- TELA 4: RESULTADOS -->
-    <div id="screen-results" class="screen app-container glass-card">
-        <h2 class="text-3xl font-bold text-blue-900 mb-2">Fim de Jogo!</h2>
-        <p class="text-gray-600 mb-6">Seu desempenho final:</p>
-        
-        <div class="score-box">
-            <h3>Pontuação Final</h3>
-            <p id="finalScoreText">0/3</p>
-        </div>
-
-        <div class="chart-container">
-            <canvas id="resultsChart"></canvas>
-        </div>
-
-        <button onclick="location.reload()" class="btn-success w-full mt-6">Jogar Novamente</button>
-    </div>
-
-    <script src="./script.js"></script>
+        // Cria o QR Code
+        const qrImage = document.getElementById('dynamic-qr');
+        qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(playerUrl)}`;
+    </script>
 </body>
 </html>

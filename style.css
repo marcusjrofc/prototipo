@@ -1,104 +1,132 @@
-/* Base e Resets */
+/* =========================================
+   CONFIGURAÇÕES GERAIS (SHARED)
+   ========================================= */
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
     margin: 0;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-/* Controle de Telas (Esconder e Mostrar) */
-.screen {
-    display: none;
-    width: 100%;
-    animation: fadeIn 0.4s ease-in-out;
-}
-.screen.active {
-    display: flex;
-    flex-direction: column;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* --- ESTILOS RESPONSIVOS (MEDIA QUERIES) --- */
-
-/* Padrão Mobile (Telas pequenas) */
-.projection-container {
-    padding: 20px;
-    align-items: center;
-    text-align: center;
-}
-.title-desktop { font-size: 2rem; font-weight: 800; color: #1e3a8a; }
-.subtitle-desktop { font-size: 1rem; color: #4b5563; margin-bottom: 2rem; }
-.code-area { display: flex; flex-direction: column; gap: 20px; align-items: center; }
-.pin-number { font-size: 3rem; font-weight: 900; color: #2563eb; background: #eff6ff; padding: 10px 20px; border-radius: 15px; border: 2px solid #bfdbfe; }
-
-.app-container {
-    padding: 20px;
-    box-sizing: border-box;
-    width: 100%;
-}
-
-/* Padrão Desktop (Telas maiores que 768px) */
-@media (min-width: 768px) {
-    /* Tela de projeção fica expansiva e deitada */
-    .title-desktop { font-size: 3.5rem; }
-    .subtitle-desktop { font-size: 1.25rem; }
-    .code-area { flex-direction: row; gap: 50px; }
-    .pin-number { font-size: 4rem; padding: 15px 40px; }
-
-    /* Telas do Aluno (Registro, Quiz, Resultados) viram um "celular virtual" no centro da tela */
-    .app-container {
-        max-width: 450px; /* Limita a largura para parecer um app */
-        margin: 0 auto;
-        border-radius: 24px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        padding: 40px 30px;
-    }
-}
-
-/* Estilos de Componentes */
-.glass-card {
+/* Efeito de Vidro (Glassmorphism) para os cartões */
+.glass-effect {
     background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
-.input-field {
-    width: 100%; padding: 12px; font-size: 1.1rem; border-radius: 12px; border: 2px solid #e5e7eb; outline: none; transition: border 0.2s; box-sizing: border-box;
-}
-.input-field:focus { border-color: #8b5cf6; }
-.form-group { width: 100%; text-align: left; margin-bottom: 1.5rem; }
-.form-group label { display: block; font-weight: 600; color: #374151; margin-bottom: 8px; }
-
-.btn-primary { background: #4f46e5; color: white; font-weight: bold; font-size: 1.2rem; padding: 15px; border-radius: 99px; border: none; cursor: pointer; transition: 0.2s; }
-.btn-primary:hover { background: #4338ca; transform: scale(1.02); }
-.btn-success { background: #10b981; color: white; font-weight: bold; font-size: 1.2rem; padding: 15px; border-radius: 99px; border: none; cursor: pointer; }
-
-/* Botões do Quiz */
-.options-grid { display: flex; flex-direction: column; gap: 12px; width: 100%; }
-.opt-btn { 
-    display: flex; align-items: center; padding: 15px; border-radius: 16px; font-weight: 600; font-size: 1.1rem; border: none; cursor: pointer; transition: 0.2s; text-align: left; 
-}
-.opt-btn:disabled { cursor: not-allowed; opacity: 0.7; }
-.opt-btn:not(:disabled):hover { filter: brightness(0.9); transform: scale(1.02); }
-
-.opt-color-0 { background: #fbbf24; color: #78350f; }
-.opt-color-1 { background: #60a5fa; color: #1e3a8a; }
-.opt-color-2 { background: #c084fc; color: #4c1d95; }
-.opt-color-3 { background: #4ade80; color: #14532d; }
-
-.opt-letter { background: rgba(255,255,255,0.4); width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; border-radius: 50%; margin-right: 15px; flex-shrink: 0; }
-
+/* Controle de Telas do JS */
+.screen { display: none; width: 100%; animation: fadeIn 0.4s ease-in-out; }
+.screen.active { display: flex; flex-direction: column; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .hidden { display: none !important; }
 .animate-fade { animation: fadeIn 0.3s; }
-.badge { background: #e5e7eb; color: #374151; font-weight: bold; padding: 4px 12px; border-radius: 99px; }
-.question-text { font-size: 1.25rem; font-weight: 700; color: #1f2937; text-align: center; margin-bottom: 24px; }
-.score-box { background: #eff6ff; border: 1px solid #bfdbfe; padding: 15px; border-radius: 16px; text-align: center; }
-.score-box h3 { margin: 0; color: #1e40af; font-size: 1.2rem; }
-#finalScoreText { font-size: 2.5rem; font-weight: 800; color: #2563eb; margin: 5px 0 0 0; }
-.chart-container { position: relative; height: 200px; width: 100%; margin-top: 20px; }
+
+/* Botão Principal */
+.btn-primary {
+    background: #4f46e5; color: white; font-weight: 700; font-size: 1.1rem;
+    padding: 16px; border-radius: 99px; border: none; cursor: pointer; transition: 0.2s;
+}
+.btn-primary:hover { background: #4338ca; transform: scale(1.02); }
+
+
+/* =========================================
+   TELA DE PROJEÇÃO (index.html)
+   ========================================= */
+.index-body {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+
+.projection-card {
+    width: 100%; max-width: 900px; padding: 60px 40px;
+    border-radius: 30px; text-align: center;
+}
+
+.title-main { font-size: 4rem; font-weight: 800; color: #1e3a8a; margin-bottom: 10px; }
+.subtitle-main { font-size: 1.5rem; color: #4b5563; margin-bottom: 50px; }
+
+.code-container {
+    display: flex; flex-direction: column; gap: 40px; align-items: center; justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .code-container { flex-direction: row; gap: 60px; }
+}
+
+.qr-wrapper {
+    background: white; padding: 20px; border-radius: 20px; border: 4px solid #bfdbfe;
+}
+.qr-image { width: 250px; height: 250px; }
+
+.pin-wrapper { display: flex; flex-direction: column; align-items: center; }
+.pin-label { font-size: 1.5rem; font-weight: 600; color: #6b7280; margin-bottom: 10px; }
+.pin-display {
+    font-size: 5rem; font-weight: 900; color: #2563eb; background: #eff6ff;
+    padding: 20px 40px; border-radius: 25px; border: 4px solid #bfdbfe; letter-spacing: 5px;
+}
+
+
+/* =========================================
+   TELA DO CELULAR (player.html)
+   ========================================= */
+.player-body {
+    background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+    display: flex; align-items: center; justify-content: center; padding: 15px;
+}
+
+.app-card {
+    width: 100%; max-width: 450px; /* Limita a largura para parecer um celular */
+    padding: 30px 25px; border-radius: 24px; margin: 0 auto;
+}
+
+/* Textos e Inputs do App */
+.emoji-header { font-size: 4rem; text-align: center; margin-bottom: 10px; }
+.app-title { font-size: 1.75rem; font-weight: 800; color: #1e3a8a; text-align: center; }
+.app-subtitle { font-size: 1rem; color: #6b7280; text-align: center; margin-bottom: 25px; }
+
+.input-group { width: 100%; text-align: left; margin-bottom: 20px; }
+.input-group label { display: block; font-weight: 600; color: #374151; margin-bottom: 8px; }
+.custom-input {
+    width: 100%; padding: 14px; font-size: 1.1rem; border-radius: 12px;
+    border: 2px solid #d1d5db; outline: none; transition: 0.2s; box-sizing: border-box;
+}
+.custom-input:focus { border-color: #4f46e5; }
+
+/* Quiz Styles */
+.quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.badge { background: #e5e7eb; color: #374151; font-weight: 700; padding: 6px 14px; border-radius: 99px; font-size: 0.9rem; }
+.timer { font-weight: 700; color: #ea580c; font-size: 1.1rem; }
+
+.image-container { width: 100%; height: 180px; border-radius: 16px; overflow: hidden; margin-bottom: 20px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); }
+.image-container img { width: 100%; height: 100%; object-fit: cover; }
+.question-text { font-size: 1.2rem; font-weight: 700; color: #1f2937; text-align: center; margin-bottom: 20px; line-height: 1.4; }
+
+/* Botões de Alternativa */
+.options-container { display: flex; flex-direction: column; gap: 12px; }
+.opt-btn { 
+    display: flex; align-items: center; padding: 15px; border-radius: 16px; font-weight: 600; 
+    font-size: 1rem; border: none; cursor: pointer; transition: 0.2s; text-align: left; 
+}
+.opt-btn:disabled { cursor: not-allowed; }
+.opt-btn:not(:disabled):hover { filter: brightness(0.9); transform: scale(1.02); }
+
+/* Cores das Alternativas */
+.opt-color-0 { background: #fef08a; color: #713f12; }
+.opt-color-1 { background: #bfdbfe; color: #1e3a8a; }
+.opt-color-2 { background: #e9d5ff; color: #4c1d95; }
+.opt-color-3 { background: #bbf7d0; color: #14532d; }
+
+.opt-letter {
+    background: rgba(255,255,255,0.5); width: 35px; height: 35px;
+    display: flex; justify-content: center; align-items: center; border-radius: 50%; margin-right: 15px; flex-shrink: 0;
+}
+
+/* Área de Feedback */
+.feedback-box { margin-top: 20px; text-align: center; padding: 15px; border-radius: 16px; background: #f9fafb; }
+.feedback-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 5px; }
+.feedback-subtext { font-size: 0.95rem; color: #4b5563; }
+
+/* Tela Final */
+.score-container { background: #eff6ff; border: 2px solid #bfdbfe; padding: 20px; border-radius: 20px; margin-bottom: 20px; }
+.score-number { font-size: 3.5rem; font-weight: 900; color: #2563eb; margin: 0; }
+.chart-wrapper { position: relative; height: 220px; width: 100%; }
